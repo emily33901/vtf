@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/galaco/vtf"
 	"log"
+
+	"github.com/emily33901/vtf"
 )
 
 func main() {

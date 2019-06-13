@@ -15,6 +15,15 @@ func ReadFromStream(stream io.Reader) (*Vtf, error) {
 	return reader.Read()
 }
 
+// ReadHeaderFromStream only reads the header from a vtf
+func ReadHeaderFromStream(stream io.Reader) (*Header, error) {
+	reader := &Reader{
+		stream: stream,
+	}
+
+	return reader.ReadHeader()
+}
+
 // ReadFromFile is a wrapper for ReadFromStream wrapper to load directly from
 // filesystem. Exists for convenience
 func ReadFromFile(filepath string) (*Vtf, error) {

@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
-	"github.com/galaco/vtf/format"
-	"github.com/galaco/vtf/internal"
 	"io"
+
+	"github.com/emily33901/vtf/format"
+	"github.com/emily33901/vtf/internal"
 )
 
 const headerSize = 96
@@ -56,6 +57,22 @@ func (reader *Reader) Read() (*Vtf, error) {
 		lowResolutionImageData:  lowResImage,
 		highResolutionImageData: highResImage,
 	}, nil
+}
+
+func (reader *Reader) ReadHeader() (*Header, error) {
+	buf := bytes.Buffer{}
+	_, err := buf.ReadFrom(reader.stream)
+	if err != nil {
+		return nil, err
+	}
+
+	// Header
+	header, err := reader.parseHeader(buf.Bytes())
+	if err != nil {
+		return nil, err
+	}
+
+	return header, nil
 }
 
 // parseHeader: Parse vtf Header.

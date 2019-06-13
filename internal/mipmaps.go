@@ -1,8 +1,9 @@
 package internal
 
 import (
-	"github.com/galaco/vtf/format"
 	"math"
+
+	"github.com/emily33901/vtf/format"
 )
 
 // ComputeMipmapSizes computes all mipmap sizes
