@@ -166,11 +166,11 @@ func (reader *Reader) readMipmaps(header *Header, buffer []byte) ([][][][][]byte
 		for frameIdx := uint16(0); frameIdx < header.Frames; frameIdx++ {
 			faces := make([][][]byte, 1)
 			// Face by face; first to last
-			// @TODO is this correct to use depth? How to know how many faces there are
+			// TODO is this correct to use depth? How to know how many faces there are
 			for faceIdx := uint16(0); faceIdx < depth; faceIdx++ {
 				zSlices := make([][]byte, 1)
 				// Z Slice by Z Slice; first to last
-				// @TODO wtf is a z slice, and how do we know how many there are
+				// TODO wtf is a z slice, and how do we know how many there are
 				for sliceIdx := uint16(0); sliceIdx < numZSlice; sliceIdx++ {
 					bufferSize := internal.ComputeSizeOfMipmapData(
 						mipmapSizes[mipmapIdx][0],
