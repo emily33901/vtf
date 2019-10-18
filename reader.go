@@ -17,7 +17,7 @@ const (
 
 var (
 	// ErrorVtfSignatureMismatch occurs when a stream does not start with the VTF magic signature
-	ErrorVtfSignatureMismatch = errors.New("header signature does not match: VTF\x00")
+	ErrorVtfSignatureMismatch = errors.New("header signature does not match: VTF\\x00")
 	// ErrorTextureDepthNotSupported occurs when attempting to parse a stream with depth > 1
 	ErrorTextureDepthNotSupported = errors.New("only vtf textures with depth 1 are supported")
 	// ErrorMipmapSizeMismatch occurs when filesize does not match calculated mipmap size
@@ -81,22 +81,6 @@ func (reader *Reader) Read() (*Vtf, error) {
 		lowResolutionImageData:  lowResImage,
 		highResolutionImageData: highResImage,
 	}, nil
-}
-
-func (reader *Reader) ReadHeader() (*Header, error) {
-	buf := bytes.Buffer{}
-	_, err := buf.ReadFrom(reader.stream)
-	if err != nil {
-		return nil, err
-	}
-
-	// Header
-	header, err := reader.parseHeader(buf.Bytes())
-	if err != nil {
-		return nil, err
-	}
-
-	return header, nil
 }
 
 // parseHeader: Parse vtf Header.
